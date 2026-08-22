@@ -1,0 +1,19 @@
+# Build output
+*.o
+*.elf
+*.map
+
+# Dependency files
+*.d
+
+# Debug / temporary files
+*.log
+*.tmp
+
+# Editor files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

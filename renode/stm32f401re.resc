@@ -1,0 +1,7 @@
+mach create
+
+machine LoadPlatformDescription @/opt/renode/platforms/cpus/stm32f4.repl
+
+sysbus LoadELF @build/stm32f401re.elf
+
+showAnalyzer usart2
