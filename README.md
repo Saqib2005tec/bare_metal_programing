@@ -1,4 +1,3 @@
-Here is a clean, well-structured, and GitHub-friendly Markdown version of your project documentation. You can copy and paste this directly into your `README.md` file.
 
 ---
 
