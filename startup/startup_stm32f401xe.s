@@ -39,6 +39,91 @@
 .word PendSV_Handler
 .word SysTick_Handler
 
+/* External interrupt vectors */
+
+/* IRQ 0  */
+.word 0
+
+/* IRQ 1  */
+.word 0
+
+/* IRQ 2  */
+.word 0
+
+/* IRQ 3  */
+.word 0
+
+/* IRQ 4  */
+.word 0
+
+/* IRQ 5  */
+.word 0
+
+/* IRQ 6  */
+.word 0
+
+/* IRQ 7  */
+.word 0
+
+/* IRQ 8  */
+.word 0
+
+/* IRQ 9  */
+.word 0
+
+/* IRQ 10 */
+.word 0
+
+/* IRQ 11 */
+.word 0
+
+/* IRQ 12 */
+.word 0
+
+/* IRQ 13 */
+.word 0
+
+/* IRQ 14 */
+.word 0
+
+/* IRQ 15 */
+.word 0
+
+/* IRQ 16 */
+.word 0
+
+/* IRQ 17 */
+.word 0
+
+/* IRQ 18 */
+.word 0
+
+/* IRQ 19 */
+.word 0
+
+/* IRQ 20 */
+.word 0
+
+/* IRQ 21 */
+.word 0
+
+/* IRQ 22 */
+.word 0
+
+/* IRQ 23 = EXTI9_5 */
+.word EXTI9_5_IRQHandler
+
+
+/* Reset handler */
+
+
+
+
+
+.section .text.EXTI9_5_IRQHandler
+.type EXTI9_5_IRQHandler, %function
+
+
 
 /* Reset handler */
 

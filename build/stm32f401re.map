@@ -7,6 +7,8 @@ Discarded input sections
  .text          0x00000000        0x0 build/startup_stm32f401xe.o
  .data          0x00000000        0x0 build/startup_stm32f401xe.o
  .bss           0x00000000        0x0 build/startup_stm32f401xe.o
+ .text.EXTI9_5_IRQHandler
+                0x00000000        0x0 build/startup_stm32f401xe.o
 
 Memory Configuration
 
@@ -23,74 +25,81 @@ LOAD build/startup_stm32f401xe.o
                 0x00000000                        _Min_Heap_Size = 0x0
                 0x00000400                        _Min_Stack_Size = 0x400
 
-.isr_vector     0x08000000       0x40
+.isr_vector     0x08000000       0xa0
                 0x08000000                        . = ALIGN (0x4)
  *(.isr_vector)
- .isr_vector    0x08000000       0x40 build/startup_stm32f401xe.o
-                0x08000040                        . = ALIGN (0x4)
+ .isr_vector    0x08000000       0xa0 build/startup_stm32f401xe.o
+                0x080000a0                        . = ALIGN (0x4)
 
-.text           0x08000040      0x1b0
-                0x08000040                        . = ALIGN (0x4)
+.text           0x080000a0      0x354
+                0x080000a0                        . = ALIGN (0x4)
  *(.text)
- .text          0x08000040      0x16c build/main.o
-                0x080000f6                main
+ .text          0x080000a0      0x310 build/main.o
+                0x080000a0                enavle_NVIC_EXTI
+                0x080000dc                EXTI5_init
+                0x08000128                GPIO_init
+                0x080001b4                EXTI9_5_IRQHandler
+                0x080001ec                GPIO_LED_init_ip
+                0x0800025c                GPIO_LED_init
+                0x0800034a                UART_init
+                0x08000398                main
  *(.text*)
  .text.Reset_Handler
-                0x080001ac       0x40 build/startup_stm32f401xe.o
-                0x080001ac                Reset_Handler
+                0x080003b0       0x40 build/startup_stm32f401xe.o
+                0x080003b0                Reset_Handler
  .text.Default_Handler
-                0x080001ec        0x2 build/startup_stm32f401xe.o
-                0x080001ec                DebugMon_Handler
-                0x080001ec                HardFault_Handler
-                0x080001ec                SysTick_Handler
-                0x080001ec                PendSV_Handler
-                0x080001ec                NMI_Handler
-                0x080001ec                UsageFault_Handler
-                0x080001ec                MemManage_Handler
-                0x080001ec                SVC_Handler
-                0x080001ec                BusFault_Handler
-                0x080001f0                        . = ALIGN (0x4)
- *fill*         0x080001ee        0x2 
-                0x080001f0                        _etext = .
+                0x080003f0        0x2 build/startup_stm32f401xe.o
+                0x080003f0                DebugMon_Handler
+                0x080003f0                HardFault_Handler
+                0x080003f0                SysTick_Handler
+                0x080003f0                PendSV_Handler
+                0x080003f0                NMI_Handler
+                0x080003f0                UsageFault_Handler
+                0x080003f0                MemManage_Handler
+                0x080003f0                SVC_Handler
+                0x080003f0                BusFault_Handler
+                0x080003f4                        . = ALIGN (0x4)
+ *fill*         0x080003f2        0x2 
+                0x080003f4                        _etext = .
 
-.glue_7         0x080001f0        0x0
- .glue_7        0x080001f0        0x0 linker stubs
+.glue_7         0x080003f4        0x0
+ .glue_7        0x080003f4        0x0 linker stubs
 
-.glue_7t        0x080001f0        0x0
- .glue_7t       0x080001f0        0x0 linker stubs
+.glue_7t        0x080003f4        0x0
+ .glue_7t       0x080003f4        0x0 linker stubs
 
-.vfp11_veneer   0x080001f0        0x0
- .vfp11_veneer  0x080001f0        0x0 linker stubs
+.vfp11_veneer   0x080003f4        0x0
+ .vfp11_veneer  0x080003f4        0x0 linker stubs
 
-.v4_bx          0x080001f0        0x0
- .v4_bx         0x080001f0        0x0 linker stubs
+.v4_bx          0x080003f4        0x0
+ .v4_bx         0x080003f4        0x0 linker stubs
 
-.iplt           0x080001f0        0x0
- .iplt          0x080001f0        0x0 build/main.o
+.iplt           0x080003f4        0x0
+ .iplt          0x080003f4        0x0 build/main.o
 
-.rodata         0x080001f0       0x10
-                0x080001f0                        . = ALIGN (0x4)
+.rodata         0x080003f4       0x1c
+                0x080003f4                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x080001f0       0x10 build/main.o
+ .rodata        0x080003f4       0x1c build/main.o
  *(.rodata*)
-                0x08000200                        . = ALIGN (0x4)
+                0x08000410                        . = ALIGN (0x4)
 
-.rel.dyn        0x08000200        0x0
- .rel.iplt      0x08000200        0x0 build/main.o
+.rel.dyn        0x08000410        0x0
+ .rel.iplt      0x08000410        0x0 build/main.o
 
-.data           0x20000000        0x0 load address 0x08000200
+.data           0x20000000        0x0 load address 0x08000410
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
  *(.data*)
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _edata = .
-                0x08000200                        _sidata = LOADADDR (.data)
+                0x08000410                        _sidata = LOADADDR (.data)
 
-.igot.plt       0x20000000        0x0 load address 0x08000200
+.igot.plt       0x20000000        0x0 load address 0x08000410
  .igot.plt      0x20000000        0x0 build/main.o
 
-.bss            0x20000000        0x0 load address 0x08000200
+.bss            0x20000000        0x0 load address 0x08000410
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sbss = .
  *(.bss)
@@ -100,7 +109,7 @@ LOAD build/startup_stm32f401xe.o
                 0x20000000                        _ebss = .
 
 ._user_heap_stack
-                0x20000000      0x400 load address 0x08000200
+                0x20000000      0x400 load address 0x08000410
                 0x20000000                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
@@ -125,13 +134,13 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000002e       0x21 build/startup_stm32f401xe.o
 
-.debug_info     0x00000000      0x143
- .debug_info    0x00000000      0x120 build/main.o
- .debug_info    0x00000120       0x23 build/startup_stm32f401xe.o
+.debug_info     0x00000000      0x1b5
+ .debug_info    0x00000000      0x192 build/main.o
+ .debug_info    0x00000192       0x23 build/startup_stm32f401xe.o
 
-.debug_abbrev   0x00000000       0xe9
- .debug_abbrev  0x00000000       0xd7 build/main.o
- .debug_abbrev  0x000000d7       0x12 build/startup_stm32f401xe.o
+.debug_abbrev   0x00000000      0x10a
+ .debug_abbrev  0x00000000       0xf8 build/main.o
+ .debug_abbrev  0x000000f8       0x12 build/startup_stm32f401xe.o
 
 .debug_aranges  0x00000000       0x48
  .debug_aranges
@@ -139,17 +148,17 @@ LOAD linker stubs
  .debug_aranges
                 0x00000020       0x28 build/startup_stm32f401xe.o
 
-.debug_line     0x00000000      0x1aa
- .debug_line    0x00000000      0x135 build/main.o
- .debug_line    0x00000135       0x75 build/startup_stm32f401xe.o
+.debug_line     0x00000000      0x25d
+ .debug_line    0x00000000      0x1e7 build/main.o
+ .debug_line    0x000001e7       0x76 build/startup_stm32f401xe.o
 
-.debug_str      0x00000000      0x15c
- .debug_str     0x00000000      0x15c build/main.o
-                                0x16b (size before relaxing)
- .debug_str     0x0000015c       0x61 build/startup_stm32f401xe.o
+.debug_str      0x00000000      0x1be
+ .debug_str     0x00000000      0x1be build/main.o
+                                0x1cd (size before relaxing)
+ .debug_str     0x000001be       0x61 build/startup_stm32f401xe.o
 
-.debug_frame    0x00000000       0xa0
- .debug_frame   0x00000000       0xa0 build/main.o
+.debug_frame    0x00000000      0x17c
+ .debug_frame   0x00000000      0x17c build/main.o
 
 .debug_line_str
                 0x00000000       0x55
